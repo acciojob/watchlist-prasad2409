@@ -3,6 +3,7 @@ package com.driver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,10 +17,11 @@ public class MovieRepository {
 
     public String addMovie(Movie movie){
         movieDB.put(movie.getName(), movie);
-        return "Success";
+        return "success";
     }
-    public void addDirector(Director director){
+    public String  addDirector(Director director){
         directorDB.put(director.getName(),director);
+        return "success";
     }
     public String addMovieDirectorPair(String movieName,String directorName){
         if(movieDB.containsKey(movieName) && directorDB.containsKey(directorName)){
@@ -65,10 +67,9 @@ public class MovieRepository {
     public void deleteDirectorByName(String name){
         if(directorDB.containsKey(name)) {
             if (dirMovieDB.containsKey(name)) {
-                List<String> list = new ArrayList<>();
-                list = dirMovieDB.get(name);
+                List<String> list = dirMovieDB.get(name);
                 for (String s : list) {
-                    list.remove(s);
+                    movieDB.remove(s);
                 }
                 dirMovieDB.remove(name);
             }
