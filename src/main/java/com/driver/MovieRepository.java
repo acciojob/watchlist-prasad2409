@@ -83,6 +83,6 @@ public class MovieRepository {
                 list.add(m);
             }
         }
-        for(String i : list) directorDB.remove(i);
+        for(String i : list) movieDB.remove(i);
     }
 }
